@@ -4,14 +4,16 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
 const app = express();
-const config = require('./webpack.config.js');
-const compiler = webpack(config);
+const devConfig = require('./webpack.config.dev.js');
+const compiler = webpack(devConfig);
 
 // Tell express to use the webpack-dev-middleware and use the webpack.config.js
 // configuration file as a base.
 app.use(webpackDevMiddleware(compiler, {
+  path: '/__webpack_hmr',
+  reload: true,
   noInfo: true,
-  publicPath: config.output.publicPath
+  publicPath: devConfig.output.publicPath
 }));
 
 app.use(webpackHotMiddleware(compiler, {
