@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const cleanWebpackPlugin = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   output: {
@@ -24,7 +24,9 @@ module.exports = {
       {  // 加载样式表
         test: /\.css$/,
 	use: [
-	  'style-loader',
+	  {
+	    loader: MiniCssExtractPlugin.loader,
+	  },
 	  'css-loader'
 	]
       },
@@ -55,6 +57,9 @@ module.exports = {
     ]
   },
   plugins: [  // plugins
-    new cleanWebpackPlugin(['dist'])
+    new MiniCssExtractPlugin({
+      filename: '[name]/[name].[hash].css',
+      chunkFilename: '[id].css'
+    })
   ],
 };
