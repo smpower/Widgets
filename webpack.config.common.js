@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const devMod = process.env.NODE_ENV === 'development';
 
 module.exports = {
   output: {
@@ -24,10 +25,8 @@ module.exports = {
       {  // 加载样式表
         test: /\.css$/,
 	use: [
-	  {
-	    loader: MiniCssExtractPlugin.loader,
-	  },
-	  'style-loader',
+	  devMod ? 'css-hot-loader' : 'style-loader',
+	  MiniCssExtractPlugin.loader,
 	  'css-loader'
 	]
       },
@@ -59,8 +58,8 @@ module.exports = {
   },
   plugins: [  // plugins
     new MiniCssExtractPlugin({
-      filename: '[name]/[name].[hash].css',
-      chunkFilename: '[id].css'
+      filename: devMod ? '[name]/[name].css' : '[name]/[name].[hash].css',
+      chunkFilename: devMod ? '[id].css' : '[id].[hash].css'
     })
   ],
 };
