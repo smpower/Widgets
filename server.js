@@ -1,3 +1,7 @@
+'use strict';
+
+process.env.NODE_ENV = 'development';
+
 const express = require('express');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');

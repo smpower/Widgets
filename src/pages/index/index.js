@@ -1,5 +1,6 @@
 import {addCommaToNumber} from '../../components/addCommaToNumber/';
 import {cube} from '../../components/math/';
+import './index.css';
 
 (function() {  // 格式化数字，加逗号
   const number = 12345;
