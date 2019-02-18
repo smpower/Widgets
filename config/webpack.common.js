@@ -4,13 +4,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const devMod = process.env.NODE_ENV === 'development';
 const paths = require('./paths');
 
-console.log(paths)
-const resolvePath = pathArg => path.resolve(__dirname, pathArg);
-
 module.exports = {
   output: {
     filename: '[name]/[name].[hash].js',
-    path: path.resolve(__dirname, '../dist'),
+    path: paths.appDist,
     publicPath: '/'
   },
   module: {
