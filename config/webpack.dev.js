@@ -4,18 +4,14 @@ const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const common = require('./webpack.common');
 const paths = require('./paths');
+const entries = require('./entries');
 
 const resolvePath = entryPath => path.resolve(__dirname, entryPath);
 const webpackHotMiddlewareConfig = 
   'webpack-hot-middleware/client?path=/__webpack_hmr&&noInfo=true&&reload=true';
 
 module.exports = merge(common, {
-  entry: {
-    index: [
-      resolvePath('../src/pages/index/index.js'),
-      webpackHotMiddlewareConfig
-    ]
-  },
+  entry: entries(process.env.NODE_ENV),
   devtool: 'inline-source-map',
   mode: process.env.NODE_ENV,
   plugins: [
