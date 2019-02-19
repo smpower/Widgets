@@ -7,15 +7,13 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const common = require('./webpack.common');
 const paths = require('./paths');
+const entries = require('./entries');
 
 const resolvePath = entryPath => path.resolve(__dirname, entryPath);
+const env = process.env.NODE_ENV || 'production';
 
 module.exports = merge(common, {
-  entry: {
-    index: [
-      resolvePath('../src/pages/index/index.js')
-    ]
-  },
+  entry: entries(env),
   mode: 'production',
   devServer: {
     contentBase: path.join(__dirname, '../dist'),

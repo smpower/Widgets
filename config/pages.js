@@ -6,8 +6,11 @@ const fs = require('fs');
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 
-module.exports = {
-  appDist: resolveApp('dist/'),
-  appSrc: resolveApp('src/'),
-  appPublicPath: '/'
+const entry = function () {
+  return {
+    index: resolveApp('src/pages/index/index.js')
+  };
 };
+
+module.exports = entry;
+
